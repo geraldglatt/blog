@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Post;
 
 use DateTimeImmutable;
 use Cocur\Slugify\Slugify;
@@ -36,7 +36,11 @@ class Post
 
     #[ORM\Column(type : 'string', length: 255 )]
     private string $state = Post::STATES[0];
-
+    
+    #[ORM\OneToOne(inversedBy: 'post', targetEntity: Thumbnail::class, cascade: ['persist',
+    'remove'])]
+    private Thumbnail $thumbnail;
+    
     #[ORM\Column(type: 'datetime_immutable', )]
     #[Assert\NotNull()]
     private \DateTimeImmutable $updatedAt;
@@ -44,6 +48,7 @@ class Post
     #[ORM\Column(type: 'datetime_immutable', )]
     #[Assert\NotNull()]
     private \DateTimeImmutable $createdAt;
+
 
     public function __construct()
     {
@@ -115,6 +120,18 @@ class Post
         return $this;
     }
 
+    public function getThumbnail(): Thumbnail
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(Thumbnail $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
     public function getUpdatedAt(): \DateTimeImmutable
     {
         return $this->updatedAt;
@@ -143,4 +160,5 @@ class Post
     {
         return $this->title;
     }
+
 }
