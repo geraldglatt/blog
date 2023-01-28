@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\PostRepository;
 use DateTimeImmutable;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -46,6 +47,11 @@ class Post
     {
         $this->updatedAt = new \DateTimeImmutable();
         $this->createdAt = new \DateTimeImmutable();
+    }
+
+    public function prePersist()
+    {
+        $this->slug = (new Slugify())->Slugify($this->title);
     }
 
     #[ORM\PreUpdate]
