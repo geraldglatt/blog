@@ -36,7 +36,7 @@ class Post
 
     #[ORM\Column(type : 'string', length: 255 )]
     private string $state = Post::STATES[0];
-    
+
     #[ORM\OneToOne(inversedBy: 'post', targetEntity: Thumbnail::class, cascade: ['persist',
     'remove'])]
     private Thumbnail $thumbnail;
@@ -56,6 +56,7 @@ class Post
         $this->createdAt = new \DateTimeImmutable();
     }
 
+    #[ORM\PrePersist]
     public function prePersist()
     {
         $this->slug = (new Slugify())->Slugify($this->title);
