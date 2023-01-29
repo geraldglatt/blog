@@ -39,7 +39,7 @@ class Post
 
     #[ORM\OneToOne(inversedBy: 'post', targetEntity: Thumbnail::class, cascade: ['persist',
     'remove'])]
-    private Thumbnail $thumbnail;
+    private ?Thumbnail $thumbnail = null;
     
     #[ORM\Column(type: 'datetime_immutable', )]
     #[Assert\NotNull()]
@@ -121,7 +121,7 @@ class Post
         return $this;
     }
 
-    public function getThumbnail(): Thumbnail
+    public function getThumbnail(): ?Thumbnail
     {
         return $this->thumbnail;
     }

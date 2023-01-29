@@ -3,84 +3,43 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    {# {% for post in posts %}
-        {{ post.title }}
-    {% endfor %} #}
-<div id="carouselExampleCaptions" class="carousel slide relative" data-bs-ride="carousel">
-  <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
-    <button
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide-to="0"
-      class="active"
-      aria-current="true"
-      aria-label="Slide 1"
-    ></button>
-    <button
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide-to="1"
-      aria-label="Slide 2"
-    ></button>
-    <button
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide-to="2"
-      aria-label="Slide 3"
-    ></button>
-  </div>
-  <div class="carousel-inner relative w-full overflow-hidden">
-    <div class="carousel-item active relative float-left w-full">
-      <img
-        src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg"
-        class="block w-full"
-        alt="..."
-      />
-      <div class="carousel-caption hidden md:block absolute text-center">
-        <h5 class="text-xl">First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
-      </div>
-    </div>
-    <div class="carousel-item relative float-left w-full">
-      <img
-        src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg"
-        class="block w-full"
-        alt="..."
-      />
-      <div class="carousel-caption hidden md:block absolute text-center">
-        <h5 class="text-xl">Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
-      </div>
-    </div>
-    <div class="carousel-item relative float-left w-full">
-      <img
-        src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg"
-        class="block w-full"
-        alt="..."
-      />
-      <div class="carousel-caption hidden md:block absolute text-center">
-        <h5 class="text-xl">Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
-      </div>
-    </div>
-  </div>
-  <button
-    class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
-    type="button"
-    data-bs-target="#carouselExampleCaptions"
-    data-bs-slide="prev"
-  >
-    <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button
-    class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
-    type="button"
-    data-bs-target="#carouselExampleCaptions"
-    data-bs-slide="next"
-  >
-    <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+<div class="container mx-auto">
+    <h1 class="text-5xl text-center mt-24 mb-8">Blog</h1>
+    <div class="flex flex-row flex-wrap justify-evenly mt-8">
+        {% for post in posts %}
+            <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md 
+            white:bg-gray-800 dark:border-gray-700 my-8 mr-4">
+                {% if post.thumbnail %}
+                    <a href="">
+                        <img src="{{ vich_uploader_asset(post.thumbnail, 'imageFile') }}" 
+                        alt="{{ post.thumbnail.imageName }}" class="rounded-t-lg">
+                    </a>
+                {% endif %}
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900
+                        dark:text-dark">
+                            {{ post.title }}
+                        </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        {{ post.content | u.truncate(200, '...') }}
+                    </p>
+                    <a href="" class="inline-flex items-center py-2 px-3 text-sm 
+                    font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none">
+                    Lire plus
+                        <svg class="ml-2 mr-1 w-4 h-4" fill="current-color" 
+                        viewbox="0 0 20 20" xmlns="https://www.w3.org/2000/svg" 
+                        >
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010
+                        1.414l-6 6a1 1 0 01-1.414l14.586 11H3a1 1 1 110-2h11.586l-4.293-4.
+                        293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>      
 </div>
+    
 {% endblock %}
