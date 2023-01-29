@@ -21,22 +21,21 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-    public function save(Post $entity, bool $flush = false): void
+    /**
+     * GET published posts
+     * @return array
+     */
+    public function findPublished(): array
     {
-        $this->getEntityManager()->persist($entity);
+        return $this->createQueryBuilder('p')
+            ->where('p.state LIKE :state')
+            ->setParameter('state', '%STATE_PUBLISHED%')
+            ->orderBy('p.createdAt' , 'DESC')
+            ->getQuery()
+            ->getResult();
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
     }
 
-    public function remove(Post $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
+    
 
 }
