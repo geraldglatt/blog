@@ -18,13 +18,7 @@ class PostController extends AbstractController
         Request $request
         ): Response
     {
-        $datas = $postRepository->findPublished();
-
-        $posts = $paginator->paginate(
-            $datas,
-            $request->query->getInt('page,', 1),
-            9
-        );
+        $posts = $postRepository->findPublished($request->query->getInt('page',1));
 
         return $this->render('pages/blog/index.html.twig', [
             'posts' =>$posts
