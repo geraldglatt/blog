@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur{% endblock %}
+
+{% block body %}
+<main id="main">
+        <div class="container">
+            <div class="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
+                        <h1 class="text-9xl font-extrabold text-white tracking-wides t">ERREUR 500</h1>
+                        <h5>Oups !?! Désolé, il y a une erreur. Si vous avez 2
+                        minutes, merci de prévenir l'administrateur du site ou d'envoyer un message depuis la page <a href="">contact</a>.</h5>
+                        <button class="mt-5">
+                            <a href="{{ path('post_index') }}" class="relative inline-block text-sm font-medium 
+                            text-[#FF6A3D] group active:text-orange-500 
+                            focus:outline-none focus:ring"
+                            >
+                                <span
+                                class="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"
+                                ></span>
+
+                                <span class="relative block px-8 py-3 bg-[#1A2238] border border-current">
+                                Retour à la page d'accueil
+                                </span>{{ path('post_index') }}
+                            </a>
+                        </button>
+                </div>
+            </div>
+        </div>
+</main>
+{% endblock %}
