@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur{% endblock %}
+
+{% block body %}
+<main id="main">
+
+     <section class="single-post-content">
+        <div class="container">
+            <div class="row">
+                <div class="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
+                        <h1 class="text-9xl font-extrabold text-white tracking-wides t">ERREUR 404</h1>
+                        <h5 class="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">La page que vous recherchez n'existe pas... ou plus !</h5>
+                        <button class="mt-5">
+                            <a href="{{ path('post_index') }}" class="relative inline-block text-sm font-medium 
+                            text-[#FF6A3D] group active:text-orange-500 
+                            focus:outline-none focus:ring"
+                            >
+                                <span
+                                class="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"
+                                ></span>
+
+                                <span class="relative block px-8 py-3 bg-[#1A2238] border border-current">
+                                Retour page D'accueil
+                                </span>{{ path('post_index') }}
+                            </a>
+                        </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</main>
+{% endblock %}
