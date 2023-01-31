@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur{% endblock %}
+
+{% block body %}
+<main id="main">
+
+     <section class="single-post-content">
+        <div class="container">
+            <div class="row">
+                <div class="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
+                    {% if app.request.attributes.get('exception').statusCode == '404' %}
+                        <h1 class="text-9xl font-extrabold text-white tracking-wides t">ERREUR 404</h1>
+                        <h5 class="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">La page que vous recherchez n'existe pas... ou plus !</h5>
+                        <button class="mt-5">
+                            <a href="{{ path('post_index') }}" class="relative inline-block text-sm font-medium 
+                            text-[#FF6A3D] group active:text-orange-500 
+                            focus:outline-none focus:ring"
+                            >
+                                <span
+                                class="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"
+                                ></span>
+
+                                <span class="relative block px-8 py-3 bg-[#1A2238] border border-current">
+                                Retour page D'accueil
+                                </span>{{ path('post_index') }}
+                            </a>
+                        </button>
+                    {% elseif app.request.attributes.get('exception').statusCode == '403' %}
+                        <h1 class="text-9xl font-extrabold text-white tracking-wides t">ERREUR 403</h1>
+                        <h5>Vous ne pouvez pas afficher cette page ou cette section !</h5>
+                    {% elseif app.request.attributes.get('exception').statusCode == '500' %}
+                        <h1 class="text-9xl font-extrabold text-white tracking-wides t">ERREUR 500</h1>
+                        <h5>Oups !?! Alors là, on a un problème... La page ou la section ne s'affiche pas. Si vous avez 2
+                        minutes, merci de prévenir l'administrateur du site.</h5>
+                    {% else %}
+                        <h5>Oups !?! Désolé, il y a une erreur. Si vous avez 2
+                        minutes, merci de prévenir l'administrateur du site ou d'envoyer un message depuis la page <a href="{{ path('app_contact') }}">contact</a>.</h5>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</main>
+{% endblock %}
