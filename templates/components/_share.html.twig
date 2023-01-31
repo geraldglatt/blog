@@ -1,5 +1,6 @@
 <div class="flex justify-center align-items flex-row">
-    <a href="https://www.facebook.com/sharer/sharer.php?u={{ absolute_url(path('post_showArticles', {slug: post.slug})) }}">
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ 
+    absolute_url(path('post_showArticles', {slug: post.slug})) }}" class="share facebook">
     <!-- Facebook -->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" 
         class="w-6 h-6 text-blue-600 mr-3"><path fill="currentColor" 
@@ -8,7 +9,8 @@
         </svg>
     </a>
     <a href="https://twitter.com/intent/tweet?text={{ post.title|url_encode }}%20
-    {{ absolute_url(path('post_showArticles', {slug: post.slug})) }}%20@blog">
+    {{ absolute_url(path('post_showArticles', {slug: post.slug})) }}%20@blog" 
+    class="share twitter">
         <svg
         class="w-6 h-6 text-blue-600 fill-current mr-3"
         xmlns="http://www.w3.org/2000/svg"
