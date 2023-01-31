@@ -18,6 +18,9 @@
         <h2 class="text-2xl text-center mb-8">Publié le
             {{ post.createdAt|date('d/m/Y') }}
         </h2>
+
+        {% include 'components/_share.html.twig' %}
+
         {% if post.thumbnail %}
                 <img src="{{ vich_uploader_asset(post.thumbnail,
                 'imageFile') }}" alt="{{ post.thumbnail.imageName }}" class="rounded-t-lg">
