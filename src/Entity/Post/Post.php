@@ -2,7 +2,6 @@
 
 namespace App\Entity\Post;
 
-use DateTimeImmutable;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\Post\PostRepository;

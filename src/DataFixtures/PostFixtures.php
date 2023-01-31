@@ -15,6 +15,7 @@ class PostFixtures extends Fixture
 
         for($i =0; $i < 50; $i++) {
             $post = new Post();
+            dd(Post::class);
             $post->setTitle($faker->words(4, true))
                  ->setContent($faker->realText(1800))
                  ->setState(mt_rand(0,2) === 1 ? Post::STATES[0]: POST::STATES[1]);
