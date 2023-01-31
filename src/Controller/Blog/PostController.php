@@ -2,6 +2,7 @@
 
 namespace App\Controller\Blog;
 
+use App\Entity\Post\Post;
 use App\Repository\Post\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,9 +24,13 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/articles/{slug}', name: 'post_showArticles', methods: ['GET'])]
-    public function showArticles(String $slug): Response
+    #[Route('/article/{slug}', name: 'post_showArticles', methods: ['GET'])]
+    public function showArticles(
+        Post $post,
+        ): Response
     {
-        return $this->render('pages/blog/showArticles.html.twig');
+        return $this->render('pages/blog/showArticles.html.twig',[
+            'post' =>$post
+        ]);
     }
 }
