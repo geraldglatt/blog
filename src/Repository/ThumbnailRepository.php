@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository\Post;
+namespace App\Repository;
 
-use App\Entity\Post\Thumbnail;
+use App\Entity\Thumbnail;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

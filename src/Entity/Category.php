@@ -1,23 +1,26 @@
 <?php
 
-namespace App\Entity\Post;
+namespace App\Entity;
 
-use App\Repository\Post\CategoryRepository;
+use App\Repository\CategoryRepository;
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[UniqueEntity('slug',  message: "Ce slug existe déjà !" )]
+#[UniqueEntity('slug', message: "Ce slug existe déjà !")]
 class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
-    
+
     #[ORM\Column(type: 'string', length: 255, unique: true)]
     #[Assert\NotBlank()]
     private string $name;
@@ -34,9 +37,14 @@ class Category
     #[Assert\NotNull]
     private \DateTimeImmutable $createdAt;
 
+    #[ORM\ManyToMany(targetEntity: Post::class, inversedBy: 'categories')]
+    #[JoinTable(name: 'categories_posts')]
+    private Collection $posts;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->posts = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -49,7 +57,7 @@ class Category
     {
         return $this->id;
     }
- 
+
     public function getName(): string
     {
         return $this->name;
@@ -61,7 +69,7 @@ class Category
 
         return $this;
     }
- 
+
     public function getSlug(): string
     {
         return $this->slug;
@@ -94,6 +102,26 @@ class Category
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+        }
+        return $this;
+    }
+
+    public function removePost(Post $post): self
+    {
+        $this->posts->removeElement($post);
 
         return $this;
     }
