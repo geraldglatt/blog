@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Entity\Post;
+namespace App\Entity;
 
-use DateTimeImmutable;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\Post\PostRepository;
+use App\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -48,11 +49,15 @@ class Post
     #[Assert\NotNull()]
     private \DateTimeImmutable $createdAt;
 
+    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'posts')]
+    private Collection $categories;
 
     public function __construct()
     {
         $this->updatedAt = new \DateTimeImmutable();
         $this->createdAt = new \DateTimeImmutable();
+        $this->categories = new ArrayCollection();
+
     }
 
     #[ORM\PrePersist]
@@ -153,6 +158,26 @@ class Post
     {
         $this->createdAt = $createdAt;
 
+        return $this;
+    }
+
+    public function getCategory(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $categories): self
+    {
+        if(!$this->categories->contains($categories)) {
+            $this->categories->add($categories);
+        }
+        return $this;
+    }
+
+    public function removeCategory(Category $categories): self
+    {
+        $this->categories->removeElement($categories);
+        
         return $this;
     }
 

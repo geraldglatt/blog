@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Post;
+namespace App\Entity;
 
 use App\Repository\ThumbnailRepository;
 use Doctrine\ORM\Mapping as ORM;

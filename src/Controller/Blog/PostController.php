@@ -2,8 +2,8 @@
 
 namespace App\Controller\Blog;
 
-use App\Entity\Post\Post;
-use App\Repository\Post\PostRepository;
+use App\Entity\Post;
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

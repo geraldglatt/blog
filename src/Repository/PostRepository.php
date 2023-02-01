@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository\Post;
+namespace App\Repository;
 
-use App\Entity\Post\Post;
+use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\Pagination\PaginationInterface;
