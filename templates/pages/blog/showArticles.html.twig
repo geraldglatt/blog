@@ -27,6 +27,12 @@
         {% endif %}
 
         <div class="w-2/3 mx-auto my-8 leading-6">
+            {% include "components/_badges.html.twig" with {
+                badges: post.category
+            } only %}
+        </div>
+
+        <div class="w-2/3 mx-auto my-8 leading-6">
             {{ post.content|raw }}
             <p class="text-xs mt-8">
                 {{ post.updatedAt|date('d/m/Y') }}

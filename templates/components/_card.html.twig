@@ -1,3 +1,10 @@
+<div class="container">
+<div class="w-2/3 mx-auto my-8 leading-6">
+    {% include "components/_badges.html.twig" with {
+        badges: post.category
+    } only %}
+        </div>
+</div>
 <div class="card max-w-sm bg-white rounded-lg border border-gray-200 shadow-md 
             white:bg-gray-800 dark:border-gray-700 my-8 mr-4">
     {% if post.thumbnail %}

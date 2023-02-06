@@ -1,0 +1,14 @@
+{% if badges %}
+    <div class="flex space-x-2 justify-center my-1 px-8">
+        {% for badge in badges %}
+            <span class="text-xs inline-block py-1 px-2 
+            leadind-none text-center whitespace-nowrap align-baseline 
+            font-bold bg-blue-600 text-white rounded-full"
+            >
+                <a href="{{ path('category_index', {slug: badge.slug}) }}">
+                {{ badge.name }}
+                </a>
+            </span>
+        {% endfor %}
+    </div>
+{% endif %}
