@@ -9,7 +9,9 @@ use Faker\Factory;
 
 class PostFixtures extends Fixture
 {
-    public function load(ObjectManager $manager): void
+    public function load(
+        ObjectManager $manager,
+        ): void
     {
         $faker = Factory::create('fr_FR');
 
@@ -20,6 +22,7 @@ class PostFixtures extends Fixture
                  ->setState(mt_rand(0,2) === 1 ? Post::STATES[0] : Post::STATES[1]);
 
             $manager->persist($post);
+            
         }
 
         $manager->flush();

@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Post;
 use App\Entity\Tag;
 use App\Repository\PostRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -34,8 +33,8 @@ class CategoryTagsFixtures extends Fixture implements DependentFixtureInterface
                     mt_rand(0,1) === 1 ? $faker->realText(254) : null
                  );
 
-            $manager->persist($category);
             $categories[] = $category;
+            $manager->persist($category);
             
         }
 
@@ -56,9 +55,9 @@ class CategoryTagsFixtures extends Fixture implements DependentFixtureInterface
                  ->setDescription(
                     mt_rand(0,1) === 1 ? $faker->realText(254) : null
                  );
-
-            $manager->persist($tag);
+            
             $tags[] = $tag;
+            $manager->persist($tag);
             
         }
 
