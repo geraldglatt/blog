@@ -170,17 +170,20 @@ class Post
         return $this->categories;
     }
 
-    public function addCategory(Category $categories): self
+    public function addCategory(Category $category): self
     {
-        if(!$this->categories->contains($categories)) {
-            $this->categories->add($categories);
+        if(!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->addPost($this);
+
         }
         return $this;
     }
 
-    public function removeCategory(Category $categories): self
+    public function removeCategory(Category $category): self
     {
-        $this->categories->removeElement($categories);
+        $this->categories->removeElement($category);
+        $category->removePost($this);
         
         return $this;
     }
@@ -194,6 +197,7 @@ class Post
     {
         if(!$this->tags->contains($tag)) {
             $this->tags->add($tag);
+            $tag->addPost($this);
         }
         return $this;
     }
@@ -201,6 +205,7 @@ class Post
     public function removeTag(Tag $tag): self
     {
         $this->tags->removeElement($tag);
+        $tag->removePost($this);
         
         return $this;
     }
