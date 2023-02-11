@@ -7,14 +7,13 @@
     <h1 class="text-5xl text-center mt-24 mb-8">{{ title }}</h1>
 
     {% include 'components/_search_data.html.twig' with {
-        form: form
+        form: form ?? null
     } only %}
 
-    {% if allCategories is defined %}
         {% include 'components/_dropdown.html.twig' with {
-            options: allCategories
+            options: allCategories ?? null
         } only %}
-    {% endif %}
+
     <div class="flex flex-row flex-wrap justify-evenly mt-8">
         {% for post in posts %}
             {% include 'components/_card.html.twig' with 
