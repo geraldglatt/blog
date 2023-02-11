@@ -4,6 +4,8 @@ namespace App\Controller\Blog;
 
 use App\Entity\Tag;
 use App\Entity\Post;
+use App\Form\SearchType;
+use App\Model\SearchData;
 use App\Repository\PostRepository;
 use App\Repository\TagRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,10 +21,25 @@ class PostController extends AbstractController
         Request $request
         ): Response
     {
+        $searchData = new SearchData();
+        $form = $this->createForm(SearchType::class, $searchData);
+
+        $form ->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $searchData->page = $request->query->getInt('page', 1);
+            $posts = $postRepository->findBySearch($searchData);
+
+            return $this->render('pages/blog/index.html.twig', [
+                'form' => $form->createView(),
+                'posts' => $posts
+            ]);
+        }
+
         $posts = $postRepository->findPublished(
             $request->query->getInt('page',1));
 
         return $this->render('pages/blog/index.html.twig', [
+            'form' => $form->createView(),
             'posts' =>$posts,
         ]);
     }
