@@ -85,8 +85,11 @@ class PostRepository extends ServiceEntityRepository
             
         if(!empty($searchData->q)) {
             $data = $data
+                ->join('p.tags', 't')
                 ->andWhere('p.title LIKE :q')
+                ->orWhere('t.name LIKE :q')
                 ->setParameter('q', "%{$searchData->q}%");
+
         }
 
         $data = $data
