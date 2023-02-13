@@ -1,31 +1,32 @@
-<div class="container">
-<div class="w-2/3 mx-auto my-8 leading-6">
-    {% include "components/_badges.html.twig" with {
-        badges: post.category
-    } only %}
+<div> class="container">
+    <div class="w-2/3 mx-auto my-8 leading-6">
+        {% include "components/_badges.html.twig" with {
+            badges: post.category
+        } only %}
+    </div>
+
+    <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md 
+                white:bg-gray-800 dark:border-gray-700 my-8 mr-4">
+        {% if post.thumbnail %}
+            <a href="{{ path('post_showArticles', {slug: post.slug}) }}">
+                <img src="{{ vich_uploader_asset(post.thumbnail, 'imageFile') }}" 
+                alt="{{ post.thumbnail.imageName }}" class="rounded-t-lg">
+            </a>
+        {% endif %}
+        <div class="p-5">   
+            <a href="{{ path('post_showArticles', {slug: post.slug}) }}">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900
+                dark:text-white">
+                    {{ post.title }}
+                </h5>
+            </a>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                {{ post.content | u.truncate(200, '...') }}
+            </p>
+            <a href="{{ path('post_showArticles', {slug: post.slug}) }}" class="inline-flex items-center py-2 px-3 text-sm 
+            font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none">
+            Lire plus
+            </a>
         </div>
-</div>
-<div class="card max-w-sm bg-white rounded-lg border border-gray-200 shadow-md 
-            white:bg-gray-800 dark:border-gray-700 my-8 mr-4">
-    {% if post.thumbnail %}
-        <a href="{{ path('post_showArticles', {slug: post.slug}) }}">
-            <img src="{{ vich_uploader_asset(post.thumbnail, 'imageFile') }}" 
-            alt="{{ post.thumbnail.imageName }}" class="rounded-t-lg">
-        </a>
-    {% endif %}
-    <div class="p-5">   
-        <a href="{{ path('post_showArticles', {slug: post.slug}) }}">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900
-            dark:text-dark">
-                {{ post.title }}
-            </h5>
-        </a>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            {{ post.content | u.truncate(200, '...') }}
-        </p>
-        <a href="{{ path('post_showArticles', {slug: post.slug}) }}" class="inline-flex items-center py-2 px-3 text-sm 
-        font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none">
-        Lire plus
-        </a>
     </div>
 </div>
