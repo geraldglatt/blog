@@ -34,7 +34,7 @@
 				</svg>
 			</li>
 		{% if app.user %}
-			<li><a href="{{ path('security_logout') }}" class="text-sm text-dark-400 hover:text-gray-500">Logout</a></li>
+			<a href="{{ path('security_logout') }}" class="text-sm text-dark-400 hover:text-gray-500">Logout</a><span><img src="{{ app.user.avatar }}" alt="" style="height:25px;width:25px" loading="lazy" class="rounded-full"></span>
 		{% else %}
 			<li class="nav-item"><a href="{{ path('security_login') }}" class="nav-link">Inscription</a></li>
 			<li class="text-dark-300">

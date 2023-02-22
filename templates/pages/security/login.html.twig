@@ -50,6 +50,16 @@
                 value="{{ csrf_token('authenticate') }}" 
             />
 
+            <div class="flex justify-between items-center mb-6">
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input appearance-none
+                    h-4 w-4 border border-gray-300 rounded transition ease-in-out"
+                    id="_remember_me" name="_remember_me" checked/>
+                    <label for="_remember_me" class="form-check-label inline-block text-gray-800">
+                    Se rappeler de moi</label>
+                </div>
+            </div>
+
           <!-- Submit button -->
             <button
                 type="submit"
