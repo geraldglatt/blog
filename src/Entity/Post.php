@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\JoinTable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -55,12 +57,17 @@ class Post
     #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'posts')]
     private Collection $tags;
 
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    #[JoinTable('user_post_like')]
+    private Collection $likes;
+
     public function __construct()
     {
         $this->updatedAt = new \DateTimeImmutable();
         $this->createdAt = new \DateTimeImmutable();
         $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->likes = new ArrayCollection();
 
     }
 
@@ -209,6 +216,32 @@ class Post
         
         return $this;
     }
+
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(User $like): self
+    {
+        if(!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+        }
+        return $this;
+    }
+
+    public function removeLike(User $like): self
+    {
+        $this->likes->removeElement($like);
+        // $like->removePost($this);
+
+        return $this;
+    }
+
+    public function isLikedByUser(User $user): bool
+    {
+        return $this->likes->contains($user);
+    } 
 
     public function __toString()
     {
