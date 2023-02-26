@@ -1,0 +1,15 @@
+<div class="p-3">
+    <div class="flex pb-4">
+        {% if app.user %}
+        <a href="{{ path('like_post', {id: post.id}) }}" data-action="like" 
+        class="flex w-fit"
+        >
+        {% endif %}
+        <i class="fa-solid fa-thumbs-up ml-3 mr-2 {{ app.user in post.likes ? 'hidden' : '' }}">J'aime !</i>
+        <i class="fa-regular fa-thumbs-up ml-3 mr-2 {{ app.user in post.likes ? '' : 'hidden' }}"></i>
+        <span class="ml-3 mr-2">{{ post.likes|length }}</span>
+        {% if app.user %}
+        </a>
+        {% endif %}
+    </div>
+</div>
