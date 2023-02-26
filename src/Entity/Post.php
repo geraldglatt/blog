@@ -241,7 +241,17 @@ class Post
     public function isLikedByUser(User $user): bool
     {
         return $this->likes->contains($user);
-    } 
+    }
+    
+    /**
+     * Get the number of likes
+     * 
+     * @return integer
+     */
+    public function howManyLikes(): int
+    {
+        return count($this->likes);
+    }
 
     public function __toString()
     {
