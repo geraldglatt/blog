@@ -22,6 +22,10 @@ composer-install: ## Install dependencies
 composer-update: ## update dependencies
 	$(COMPOSER) update
 
+## -- Test -- ##
+tests:
+	$(PHP) bin/phpunit --testdox tests/E2E/
+
 ## ----------- Database ----------- ##
 
 rebuild: ## rebuild
