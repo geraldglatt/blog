@@ -54,5 +54,13 @@
                 {% endfor %}
             </ul>
         </div>
-    </div>
+
+        <div class="mt-5">
+            <h2 class="text-2xl mb-8">Commentaire(s):</h2>
+            <div class="comments">
+                {% for comment in post.comments %}
+                  {% include 'components/_comment.html.twig' %}
+                {% endfor %}   
+            </div>
+        </div>
 {% endblock %}
